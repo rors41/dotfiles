@@ -1,0 +1,10 @@
+# theme
+theme = tokyonight-storm
+
+# font
+font-family = MesloLGS NF Regular
+font-family-bold = MesloLGS NF Bold
+font-family-italic = MesloLGS NF Italic
+font-family-bold-italic = MesloLGS NF Bold Italic
+
+font-size = 13.5
