@@ -1,3 +1,6 @@
+# autocomplete
+autoload -Uz compinit && compinit
+
 # aliases
 alias vim=nvim
 
