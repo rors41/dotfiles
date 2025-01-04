@@ -5,6 +5,7 @@ alias vim=nvim
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
+setopt share_history
 
 # prompt
 export CLICOLOR=1
