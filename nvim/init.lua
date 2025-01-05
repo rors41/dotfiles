@@ -921,26 +921,6 @@ require('lazy').setup({
     --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
     --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
   },
-  {
-    'tamton-aquib/duck.nvim',
-    config = function()
-      vim.keymap.set('n', '<leader>dd', function()
-        require('duck').hatch()
-      end, {})
-      vim.keymap.set('n', '<leader>dD', function()
-        local duck = require 'duck'
-        for _ = 0, 10 do
-          duck.hatch()
-        end
-      end, {})
-      vim.keymap.set('n', '<leader>dk', function()
-        require('duck').cook()
-      end, {})
-      vim.keymap.set('n', '<leader>da', function()
-        require('duck').cook_all()
-      end, {})
-    end,
-  },
 
   -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and

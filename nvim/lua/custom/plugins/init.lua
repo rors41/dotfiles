@@ -31,4 +31,45 @@ return {
       vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, { desc = 'Toggle undo tree' })
     end,
   },
+  {
+    'saecki/crates.nvim',
+    event = { 'BufRead Cargo.toml' },
+    config = function()
+      require('crates').setup {
+        completion = {
+          crates = {
+            enabled = true,
+            max_results = 8,
+            min_chars = 3,
+          },
+        },
+        lsp = {
+          enabled = true,
+          actions = true,
+          completion = true,
+          hover = true,
+        },
+      }
+    end,
+  },
+  {
+    'tamton-aquib/duck.nvim',
+    config = function()
+      vim.keymap.set('n', '<leader>dd', function()
+        require('duck').hatch()
+      end, {})
+      vim.keymap.set('n', '<leader>dD', function()
+        local duck = require 'duck'
+        for _ = 0, 10 do
+          duck.hatch()
+        end
+      end, {})
+      vim.keymap.set('n', '<leader>dk', function()
+        require('duck').cook()
+      end, {})
+      vim.keymap.set('n', '<leader>da', function()
+        require('duck').cook_all()
+      end, {})
+    end,
+  },
 }
