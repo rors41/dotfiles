@@ -8,3 +8,5 @@ font-family-italic = MesloLGS NF Italic
 font-family-bold-italic = MesloLGS NF Bold Italic
 
 font-size = 13.5
+
+font-feature = -calt
