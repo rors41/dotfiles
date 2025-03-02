@@ -53,5 +53,9 @@ bindkey ^S history-incremental-search-forward
 # syntax highlight
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+# fzf
+source <(fzf --zsh)
+
+
 # cargo
 export PATH="$HOME/.cargo/bin:$PATH"
