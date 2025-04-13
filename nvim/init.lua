@@ -180,9 +180,25 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
--- Quickfix list
+-- Navigate quickfix list
 vim.keymap.set('n', '<M-j>', '<cmd>cnext<CR>', { desc = 'Next item in Quickfix list' })
 vim.keymap.set('n', '<M-k>', '<cmd>cprev<CR>', { desc = 'Previous item in Quickfix list' })
+
+-- Toggle Quickfix list
+vim.keymap.set('n', '<M-q>', function()
+  local is_open = false
+  for _, win in ipairs(vim.fn.getwininfo()) do
+    if win.quickfix == 1 then
+      is_open = true
+      break
+    end
+  end
+  if is_open then
+    vim.cmd 'cclose'
+  else
+    vim.cmd 'copen'
+  end
+end, { noremap = true, silent = true })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
