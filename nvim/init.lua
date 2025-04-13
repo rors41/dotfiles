@@ -180,6 +180,10 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
+-- Quickfix list
+vim.keymap.set('n', '<M-j>', '<cmd>cnext<CR>', { desc = 'Next item in Quickfix list' })
+vim.keymap.set('n', '<M-k>', '<cmd>cprev<CR>', { desc = 'Previous item in Quickfix list' })
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
