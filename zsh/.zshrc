@@ -1,6 +1,9 @@
 # autocomplete
 autoload -Uz compinit && compinit
 
+# edit command line
+autoload -U edit-command-line
+
 # aliases
 alias vim=nvim
 
@@ -45,6 +48,7 @@ function zle-line-init zle-keymap-select {
 
 zle -N zle-line-init
 zle -N zle-keymap-select
+zle -N edit-command-line
 
 bindkey -M vicmd 'vv' edit-command-line
 bindkey ^R history-incremental-search-backward 
