@@ -5,8 +5,19 @@ return {
     event = { 'BufReadPre', 'BufNewFile' },
     config = function()
       local lint = require 'lint'
+
+      local python_linters = {}
+
+      if vim.fn.executable 'ruff' == 1 then
+        table.insert(python_linters, 'ruff')
+      end
+      if vim.fn.executable 'mypy' == 1 then
+        table.insert(python_linters, 'mypy')
+      end
+
       lint.linters_by_ft = {
         markdown = { 'markdownlint' },
+        python = python_linters,
       }
 
       -- To allow other plugins to add linters to require('lint').linters_by_ft,
