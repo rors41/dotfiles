@@ -13,11 +13,23 @@ HISTSIZE=10000
 SAVEHIST=10000
 setopt share_history
 
+# fzf cd to one of the repos dir
+if [[ -d "$HOME/Desktop/repos" ]]; then
+  function repos() {
+    local dir
+    dir=$(find "$HOME/Desktop/repos" -maxdepth 1 -mindepth 1 -type d | fzf)
+    if [[ -n "$dir" ]]; then
+      cd "$dir"
+    fi
+  }
+fi
+
 # prompt
 export CLICOLOR=1
 
+# git branch in prompt
 function parse_git_branch() {
-    git branch 2> /dev/null | sed -n -e 's/^\* \(.*\)/(\1) /p'
+  git branch 2> /dev/null | sed -n -e 's/^\* \(.*\)/(\1) /p'
 }
 
 COLOR_DEF=$'%f'

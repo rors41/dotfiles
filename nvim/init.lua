@@ -179,6 +179,13 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+vim.keymap.set('n', '<leader>dt', function()
+  if vim.diagnostic.is_enabled() then
+    vim.diagnostic.enable(false)
+  else
+    vim.diagnostic.enable(true)
+  end
+end)
 
 -- Navigate quickfix list
 vim.keymap.set('n', '<M-j>', '<cmd>cnext<CR>', { desc = 'Next item in Quickfix list' })

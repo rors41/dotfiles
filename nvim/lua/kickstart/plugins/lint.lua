@@ -12,6 +12,20 @@ return {
         table.insert(python_linters, 'ruff')
       end
       if vim.fn.executable 'mypy' == 1 then
+        local mypy = require('lint').linters.mypy
+        local virtual = os.getenv 'VIRTUAL_ENV'
+        mypy.args = {
+          '--show-column-numbers',
+          '--show-error-end',
+          '--hide-error-context',
+          '--no-color-output',
+          '--no-error-summary',
+          '--no-pretty',
+          '--python-executable',
+          virtual .. '/bin/python',
+        }
+        print(mypy.cmd, mypy.stdin, mypy.stream, mypy.ignore_exitcode)
+
         table.insert(python_linters, 'mypy')
       end
 
