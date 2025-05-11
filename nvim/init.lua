@@ -179,13 +179,13 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
-vim.keymap.set('n', '<leader>dt', function()
+vim.keymap.set('n', '<leader>td', function()
   if vim.diagnostic.is_enabled() then
     vim.diagnostic.enable(false)
   else
     vim.diagnostic.enable(true)
   end
-end)
+end, { desc = '[T]oggle [d]iagnostics' })
 
 -- Navigate quickfix list
 vim.keymap.set('n', '<M-j>', '<cmd>cnext<CR>', { desc = 'Next item in Quickfix list' })
@@ -561,10 +561,6 @@ require('lazy').setup({
           --  Useful when you're not sure what type a variable is and you want to see
           --  the definition of its *type*, not where it was *defined*.
           map('grt', require('telescope.builtin').lsp_type_definitions, '[G]oto [T]ype Definition')
-
-          vim.keymap.set('i', '<C-V>', function()
-            vim.lsp.buf.signature_help()
-          end, { desc = 'Signature help', buffer = event.buf })
 
           -- The following two autocommands are used to highlight references of the
           -- word under your cursor when your cursor rests there for a little while.
@@ -997,6 +993,5 @@ require('lazy').setup({
   },
 })
 
-require 'custom.lua.autocmds'
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

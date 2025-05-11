@@ -23,6 +23,10 @@ return {
 
     -- Add your own debuggers here
     'leoluz/nvim-dap-go',
+    'mfussenegger/nvim-dap-python',
+
+    -- virtual text
+    'theHamsta/nvim-dap-virtual-text',
   },
   keys = {
     -- Basic debugging keymaps, feel free to change to your liking!
@@ -55,22 +59,29 @@ return {
       desc = 'Debug: Step Out',
     },
     {
-      '<leader>b',
+      '<leader>db',
       function()
         require('dap').toggle_breakpoint()
       end,
       desc = 'Debug: Toggle Breakpoint',
     },
     {
-      '<leader>B',
+      '<leader>dB',
       function()
         require('dap').set_breakpoint(vim.fn.input 'Breakpoint condition: ')
       end,
       desc = 'Debug: Set Breakpoint',
     },
+    {
+      '<leader>dq',
+      function()
+        require('dap').terminate()
+      end,
+      desc = 'Debug: Terminate',
+    },
     -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
     {
-      '<F7>',
+      '<leader>du',
       function()
         require('dapui').toggle()
       end,
@@ -80,6 +91,10 @@ return {
   config = function()
     local dap = require 'dap'
     local dapui = require 'dapui'
+
+    require('nvim-dap-virtual-text').setup {
+      commented = true, -- Show virtual text alongside comment
+    }
 
     require('mason-nvim-dap').setup {
       -- Makes a best effort to setup the various debuggers with
@@ -144,5 +159,7 @@ return {
         detached = vim.fn.has 'win32' == 0,
       },
     }
+
+    require('dap-python').setup 'uv'
   end,
 }
