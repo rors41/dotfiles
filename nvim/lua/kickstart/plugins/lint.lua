@@ -24,8 +24,6 @@ return {
           '--python-executable',
           virtual .. '/bin/python',
         }
-        print(mypy.cmd, mypy.stdin, mypy.stream, mypy.ignore_exitcode)
-
         table.insert(python_linters, 'mypy')
       end
 
