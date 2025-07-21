@@ -21,9 +21,12 @@ return {
           '--no-color-output',
           '--no-error-summary',
           '--no-pretty',
-          '--python-executable',
-          virtual .. '/bin/python',
         }
+
+        if virtual then
+          table.insert(mypy.args, '--python-executable')
+          table.insert(mypy.args, virtual .. '/bin/python')
+        end
         table.insert(python_linters, 'mypy')
       end
 
