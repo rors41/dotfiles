@@ -217,7 +217,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
   group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
   callback = function()
-    vim.highlight.on_yank()
+    vim.hl.on_yank()
   end,
 })
 
@@ -551,11 +551,21 @@ require('lazy').setup({
 
           -- Fuzzy find all the symbols in your current document.
           --  Symbols are things like variables, functions, types, etc.
-          map('gO', require('telescope.builtin').lsp_document_symbols, 'Open Document Symbols')
+          map('gOa', require('telescope.builtin').lsp_document_symbols, 'Goto All Document Symbols')
+
+          -- Fuzzy find all functions in your current document.
+          map('gOf', function()
+            require('telescope.builtin').lsp_document_symbols { symbols = { 'method', 'function' } }
+          end, 'Goto Document Functions')
 
           -- Fuzzy find all the symbols in your current workspace.
           --  Similar to document symbols, except searches over your entire project.
-          map('gW', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'Open Workspace Symbols')
+          map('gWa', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'Goto All Workspace Symbols')
+
+          -- Fuzzy find all the functions in your current document.
+          map('gWf', function()
+            require('telescope.builtin').lsp_dynamic_workspace_symbols { symbols = { 'method', 'function' } }
+          end, 'Goto Workspace Functions')
 
           -- Jump to the type of the word under your cursor.
           --  Useful when you're not sure what type a variable is and you want to see
@@ -751,7 +761,7 @@ require('lazy').setup({
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
-        python = { 'isort', 'ruff_format' },
+        python = { 'ruff_format' },
         -- Conform can also run multiple formatters sequentially
         -- python = { 'isort', 'ruff' },
         --
