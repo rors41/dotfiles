@@ -127,6 +127,13 @@ vim.opt.wrap = false
 -- Save undo history
 vim.opt.undofile = true
 
+local hover = vim.lsp.buf.hover
+vim.lsp.buf.hover = function()
+  hover {
+    border = 'rounded',
+  }
+end
+
 -- Copying and pasting
 vim.keymap.set('x', '<leader>p', [["_dP]], { desc = 'Paste without overwriting buffer' })
 vim.keymap.set({ 'n', 'v' }, '<leader>P', [["+p]], { desc = 'Paste from clipboard' })
