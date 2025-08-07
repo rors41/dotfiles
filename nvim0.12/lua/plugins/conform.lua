@@ -6,11 +6,9 @@ require('conform').setup {
     -- You can use a function here to determine the formatters dynamically
     python = function(bufnr)
       if require('conform').get_formatter_info('ruff_format', bufnr).available then
-        return { -- To fix auto-fixable lint errors.
+        return {
           'ruff_fix',
-          -- To run the Ruff formatter.
           'ruff_format',
-          -- To organize the imports.
           'ruff_organize_imports',
         }
       else

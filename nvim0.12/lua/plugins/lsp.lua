@@ -1,11 +1,8 @@
 require('mason').setup()
 
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 vim.keymap.set('n', 'grn', vim.lsp.buf.rename, { desc = '[R]e[n]ame' })
-vim.keymap.set('n', '<leader>F', vim.lsp.buf.format, { desc = 'LSP [F]ormat' })
-
--- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+
 vim.keymap.set('n', '<leader>td', function()
   if vim.diagnostic.is_enabled() then
     vim.diagnostic.enable(false)
@@ -14,6 +11,7 @@ vim.keymap.set('n', '<leader>td', function()
   end
 end, { desc = '[T]oggle [d]iagnostics' })
 
+-- sort diagnostics
 vim.diagnostic.config {
   severity_sort = true,
   underline = { severity = vim.diagnostic.severity.ERROR },

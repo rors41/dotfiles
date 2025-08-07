@@ -1,6 +1,7 @@
 MiniPick = require 'mini.pick'
 vim.ui.select = MiniPick.ui_select
 MiniPick.setup {
+  -- center mini.pick window
   window = {
     config = function()
       local height = math.floor(0.618 * vim.o.lines)
@@ -64,7 +65,7 @@ miniclue.setup {
     miniclue.gen_clues.z(),
   },
   window = {
-    delay = 2000,
+    delay = 1250,
     scroll_down = '<C-d>',
     scroll_up = '<C-u>',
   },
@@ -72,6 +73,7 @@ miniclue.setup {
 
 local statusline = require 'mini.statusline'
 statusline.setup()
+---@diagnostic disable-next-line: duplicate-set-field
 statusline.section_location = function()
   return '%2l:%-2v'
 end
