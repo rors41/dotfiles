@@ -65,6 +65,7 @@ zle -N edit-command-line
 bindkey -M vicmd 'vv' edit-command-line
 bindkey ^R history-incremental-search-backward 
 bindkey ^S history-incremental-search-forward
+bindkey -v '^?' backward-delete-char
 
 # syntax highlight
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -75,6 +76,7 @@ source <(fzf --zsh)
 
 # cargo
 export PATH="$HOME/.cargo/bin:$PATH"
+export EDITOR="nvim"
 
 # nvm
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
