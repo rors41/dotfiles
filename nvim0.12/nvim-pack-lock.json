@@ -1,0 +1,72 @@
+{
+  "plugins": {
+    "blink.cmp": {
+      "rev": "ce26f9fbaa4560440dd981cad1d2e47ae82dd3a6",
+      "src": "https://github.com/Saghen/blink.cmp"
+    },
+    "conform.nvim": {
+      "rev": "973f3cb73887d510321653044791d7937c7ec0fa",
+      "src": "https://github.com/stevearc/conform.nvim"
+    },
+    "gitsigns.nvim": {
+      "rev": "736f51d2bb684c06f39a2032f064d7244f549981",
+      "src": "https://github.com/lewis6991/gitsigns.nvim"
+    },
+    "mason.nvim": {
+      "rev": "9e25c98d4826998460926f8c5c2284848d80ae89",
+      "src": "https://github.com/mason-org/mason.nvim"
+    },
+    "mini.clue": {
+      "rev": "edf3016944b5f2c7932d39af83af7c885ca0f019",
+      "src": "https://github.com/echasnovski/mini.clue"
+    },
+    "mini.extra": {
+      "rev": "0dec9611833d058f9d2d48f6333b41631f5ef3b9",
+      "src": "https://github.com/echasnovski/mini.extra"
+    },
+    "mini.files": {
+      "rev": "5b9431cf5c69b8e69e5a67d2d12338a3ac2e1541",
+      "src": "https://github.com/echasnovski/mini.files"
+    },
+    "mini.pick": {
+      "rev": "82ec629ca108c7b96b8b9bb733d235b39e137690",
+      "src": "https://github.com/echasnovski/mini.pick"
+    },
+    "mini.statusline": {
+      "rev": "f6917f4da995d64edf3728b1302dbd5d4561c912",
+      "src": "https://github.com/echasnovski/mini.statusline"
+    },
+    "mini.surround": {
+      "rev": "b12fcfefd6b9b7c9e9a773bc0e3e07ae20c03351",
+      "src": "https://github.com/echasnovski/mini.surround"
+    },
+    "nvim-dap": {
+      "rev": "a9d8cb68ee7184111dc66156c4a2ebabfbe01bc5",
+      "src": "https://github.com/mfussenegger/nvim-dap"
+    },
+    "nvim-dap-view": {
+      "rev": "4f9069096f5616f12a73b9287586d21eb1e4fdb0",
+      "src": "https://github.com/igorlfs/nvim-dap-view"
+    },
+    "nvim-lint": {
+      "rev": "7ef127aaede2a4d5ad8df8321e2eb4e567f29594",
+      "src": "https://github.com/mfussenegger/nvim-lint"
+    },
+    "nvim-lspconfig": {
+      "rev": "9141be4c1332afc83bdf1b0278dbb030f75ff8e3",
+      "src": "https://github.com/neovim/nvim-lspconfig"
+    },
+    "snacks.nvim": {
+      "rev": "bc0630e43be5699bb94dadc302c0d21615421d93",
+      "src": "https://github.com/folke/snacks.nvim"
+    },
+    "tokyonight.nvim": {
+      "rev": "057ef5d260c1931f1dffd0f052c685dcd14100a3",
+      "src": "https://github.com/folke/tokyonight.nvim"
+    },
+    "undotree": {
+      "rev": "28f2f54a34baff90ea6f4a735ef1813ad875c743",
+      "src": "https://github.com/mbbill/undotree"
+    }
+  }
+}

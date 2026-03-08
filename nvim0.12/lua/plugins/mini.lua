@@ -65,7 +65,7 @@ miniclue.setup {
     miniclue.gen_clues.z(),
   },
   window = {
-    delay = 1250,
+    delay = 500,
     scroll_down = '<C-d>',
     scroll_up = '<C-u>',
   },
@@ -83,10 +83,11 @@ vim.keymap.set('n', '<leader>sH', ':Pick help<CR>', { desc = '[S]earch [H]elp' }
 vim.keymap.set('n', '<leader>sh', ':Pick history<CR>', { desc = '[S]earch [H]istory' })
 vim.keymap.set('n', '<leader>sg', ':Pick grep_live<CR>', { desc = '[S]earch [G]rep' })
 vim.keymap.set('n', '<leader>sr', ':Pick resume<CR>', { desc = '[S]earch [R]esume' })
-vim.keymap.set('n', '<leader>sb', ':Pick buffers<CR>', { desc = '[S]earch [B]uffers' })
+vim.keymap.set('n', '<leader><leader>', ':Pick buffers<CR>', { desc = '[S]earch [B]uffers' })
 vim.keymap.set('n', '<leader>sc', ':Pick git_commits<CR>', { desc = '[S]earch Git [C]ommits' })
 vim.keymap.set('n', '<leader>sb', ':Pick git_branches<CR>', { desc = '[S]earch Git [B]ranches' })
 vim.keymap.set('n', '<leader>sk', ':Pick keymaps<CR>', { desc = '[S]earch [K]eymaps' })
+vim.keymap.set('n', '<leader>sq', function() MiniExtra.pickers.list { scope = 'quickfix' } end, { desc = '[S]earch [Q]uickfix' })
 
 vim.keymap.set('n', '\\', function()
   local buf_name = vim.api.nvim_buf_get_name(0)

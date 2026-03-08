@@ -28,6 +28,12 @@ vim.keymap.set({ 'n', 'v' }, '<leader>y', [["+y]], { desc = 'Copy into clipboard
 vim.keymap.set('n', '<leader>Y', [["+Y]], { desc = 'Copy line into clipboard' })
 vim.keymap.set({ 'n', 'v' }, '<leader>D', [["_d]], { desc = 'Delete without overwriting buffer' })
 
+-- Navigate splits with Ctrl + H/J/K/L
+vim.api.nvim_set_keymap('n', '<C-h>', '<C-w>h', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-j>', '<C-w>j', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-k>', '<C-w>k', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', { noremap = true, silent = true })
+
 -- Move line up and down
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'Move line down' })
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move line up' })
@@ -115,7 +121,9 @@ vim.pack.add {
   { src = 'https://github.com/Saghen/blink.cmp' },
   { src = 'https://github.com/stevearc/conform.nvim' },
   { src = 'https://github.com/mfussenegger/nvim-lint' },
+  { src = 'https://github.com/mfussenegger/nvim-dap' },
   { src = 'https://github.com/mbbill/undotree' },
+  { src = 'https://github.com/igorlfs/nvim-dap-view' },
 }
 
 vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, { desc = 'Toggle [U]ndotree' })
@@ -127,5 +135,6 @@ require 'plugins.lsp'
 require 'plugins.blink'
 require 'plugins.conform'
 require 'plugins.lint'
+require 'plugins.dap'
 
 vim.cmd [[colorscheme tokyonight-storm]]
