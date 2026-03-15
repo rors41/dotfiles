@@ -708,6 +708,16 @@ require('lazy').setup({
           },
         },
       }
+      require('lspconfig').zls.setup {
+
+        settings = {
+          zls = {
+            enable_build_on_save = true,
+
+            semantic_tokens = 'partial',
+          },
+        },
+      }
 
       require('mason-lspconfig').setup {
         ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
@@ -887,7 +897,7 @@ require('lazy').setup({
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'tokyonight-moon'
+      vim.cmd.colorscheme 'tokyonight-storm'
     end,
   },
 

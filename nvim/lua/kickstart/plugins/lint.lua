@@ -21,6 +21,7 @@ return {
           '--no-color-output',
           '--no-error-summary',
           '--no-pretty',
+          '--enable-error-code=possibly-undefined',
         }
 
         if virtual then
