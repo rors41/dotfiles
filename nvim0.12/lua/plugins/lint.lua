@@ -16,6 +16,7 @@ if vim.fn.executable 'mypy' == 1 then
     '--no-color-output',
     '--no-error-summary',
     '--no-pretty',
+    '--enable-error-code=possibly-undefined',
   }
 
   if virtual then
