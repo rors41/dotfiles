@@ -1,7 +1,7 @@
 #!/bin/zsh
 
-links_to_check=(~/.config/nvim ~/.config/tmux ~/.config/ghostty ~/.zshrc)
-expected_targets=("$PWD/nvim" "$PWD/tmux" "$PWD/ghostty" "$PWD/zsh/.zshrc")
+links_to_check=(~/.config/nvim ~/.config/ghostty ~/.zshrc)
+expected_targets=("$PWD/nvim" "$PWD/ghostty" "$PWD/zsh/.zshrc")
 
 for i in {1..${#links_to_check[@]}}; do
 
