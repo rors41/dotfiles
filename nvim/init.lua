@@ -83,11 +83,11 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 --  Try it with `yap` in normal mode
 --  See `:help vim.highlight.on_yank()`
 vim.api.nvim_create_autocmd('TextYankPost', {
-  desc = 'Highlight when yanking (copying) text',
-  group = vim.api.nvim_create_augroup('nvim-highlight-yank', { clear = true }),
-  callback = function()
-    vim.hl.on_yank()
-  end,
+    desc = 'Highlight when yanking (copying) text',
+    group = vim.api.nvim_create_augroup('nvim-highlight-yank', { clear = true }),
+    callback = function()
+        vim.hl.on_yank()
+    end,
 })
 
 -- Navigate quickfix list
@@ -96,49 +96,51 @@ vim.keymap.set('n', '<M-k>', '<cmd>cprev<CR>', { desc = 'Previous item in Quickf
 
 -- Toggle Quickfix list
 vim.keymap.set('n', '<M-q>', function()
-  local is_open = false
-  for _, win in ipairs(vim.fn.getwininfo()) do
-    if win.quickfix == 1 then
-      is_open = true
-      break
+    local is_open = false
+    for _, win in ipairs(vim.fn.getwininfo()) do
+        if win.quickfix == 1 then
+            is_open = true
+            break
+        end
     end
-  end
-  if is_open then
-    vim.cmd 'cclose'
-  else
-    vim.cmd 'copen'
-  end
+    if is_open then
+        vim.cmd('cclose')
+    else
+        vim.cmd('copen')
+    end
 end, { noremap = true, silent = true })
 
-vim.pack.add {
-  { src = 'https://github.com/folke/snacks.nvim' },
-  { src = 'https://github.com/echasnovski/mini.pick' },
-  { src = 'https://github.com/echasnovski/mini.extra' },
-  { src = 'https://github.com/echasnovski/mini.files' },
-  { src = 'https://github.com/echasnovski/mini.surround' },
-  { src = 'https://github.com/echasnovski/mini.statusline' },
-  { src = 'https://github.com/echasnovski/mini.clue' },
-  { src = 'https://github.com/mason-org/mason.nvim' },
-  { src = 'https://github.com/neovim/nvim-lspconfig' },
-  { src = 'https://github.com/folke/tokyonight.nvim' },
-  { src = 'https://github.com/lewis6991/gitsigns.nvim' },
-  { src = 'https://github.com/Saghen/blink.cmp' },
-  { src = 'https://github.com/stevearc/conform.nvim' },
-  { src = 'https://github.com/mfussenegger/nvim-lint' },
-  { src = 'https://github.com/mfussenegger/nvim-dap' },
-  { src = 'https://github.com/igorlfs/nvim-dap-view' },
-  { src = 'https://github.com/nvim-treesitter/nvim-treesitter', version = 'main' },
-}
+vim.pack.add({
+    { src = 'https://github.com/folke/snacks.nvim' },
+    { src = 'https://github.com/folke/todo-comments.nvim' },
+    { src = 'https://github.com/folke/tokyonight.nvim' },
+    { src = 'https://github.com/echasnovski/mini.pick' },
+    { src = 'https://github.com/echasnovski/mini.extra' },
+    { src = 'https://github.com/echasnovski/mini.files' },
+    { src = 'https://github.com/echasnovski/mini.surround' },
+    { src = 'https://github.com/echasnovski/mini.statusline' },
+    { src = 'https://github.com/echasnovski/mini.clue' },
+    { src = 'https://github.com/mason-org/mason.nvim' },
+    { src = 'https://github.com/neovim/nvim-lspconfig' },
+    { src = 'https://github.com/lewis6991/gitsigns.nvim' },
+    { src = 'https://github.com/Saghen/blink.cmp' },
+    { src = 'https://github.com/stevearc/conform.nvim' },
+    { src = 'https://github.com/mfussenegger/nvim-lint' },
+    { src = 'https://github.com/mfussenegger/nvim-dap' },
+    { src = 'https://github.com/igorlfs/nvim-dap-view' },
+    { src = 'https://github.com/nvim-treesitter/nvim-treesitter', version = 'main' },
+})
 
-require 'plugins.snacks'
-require 'plugins.mini'
-require 'plugins.gitsigns'
-require 'plugins.lsp'
-require 'plugins.blink'
-require 'plugins.conform'
-require 'plugins.lint'
-require 'plugins.dap'
-require 'plugins.treesitter'
-require 'plugins.undotree'
+require('plugins.snacks')
+require('plugins.todo')
+require('plugins.mini')
+require('plugins.gitsigns')
+require('plugins.lsp')
+require('plugins.blink')
+require('plugins.conform')
+require('plugins.lint')
+require('plugins.dap')
+require('plugins.treesitter')
+require('plugins.undotree')
 
-vim.cmd [[colorscheme tokyonight-storm]]
+vim.cmd([[colorscheme tokyonight-storm]])

@@ -87,7 +87,9 @@ vim.keymap.set('n', '<leader><leader>', ':Pick buffers<CR>', { desc = '[S]earch 
 vim.keymap.set('n', '<leader>sc', ':Pick git_commits<CR>', { desc = '[S]earch Git [C]ommits' })
 vim.keymap.set('n', '<leader>sb', ':Pick git_branches<CR>', { desc = '[S]earch Git [B]ranches' })
 vim.keymap.set('n', '<leader>sk', ':Pick keymaps<CR>', { desc = '[S]earch [K]eymaps' })
-vim.keymap.set('n', '<leader>sq', function() MiniExtra.pickers.list { scope = 'quickfix' } end, { desc = '[S]earch [Q]uickfix' })
+vim.keymap.set('n', '<leader>sq', function()
+  MiniExtra.pickers.list { scope = 'quickfix' }
+end, { desc = '[S]earch [Q]uickfix' })
 
 vim.keymap.set('n', '\\', function()
   local buf_name = vim.api.nvim_buf_get_name(0)
@@ -95,3 +97,38 @@ vim.keymap.set('n', '\\', function()
   MiniFiles.open(path)
   MiniFiles.reveal_cwd()
 end, { desc = 'Open Mini Files' })
+
+-- LuaJIT local lookup perf
+local sbyte = string.byte
+local sfind = string.find
+
+-- Create mapping to show/hide dot-files
+local show_dotfiles = true
+
+local filter_dot = function(fs_entry)
+  -- LuaJIT string.byte compares with no string allocation
+  local is_dot = sbyte(fs_entry.name, 1) == 46 -- 46 is ASCII for '.'
+  -- '1, true' for plain search instead of pattern comparison
+  local is_in_path = sfind(MiniFiles.get_fs_entry().path, fs_entry.path, 1, true) ~= nil
+  return not is_dot or is_in_path
+end
+
+local toggle_dotfiles = function()
+  show_dotfiles = not show_dotfiles
+  local new_filter = function(fs_entry)
+    return show_dotfiles or filter_dot(fs_entry)
+  end
+  MiniFiles.refresh { content = { filter = new_filter } }
+end
+
+-- Actually bind keymaps to toggle hidden, split open, etc.
+local minifiles_settings = vim.api.nvim_create_augroup('my-minif-settings', { clear = true })
+vim.api.nvim_create_autocmd('User', {
+  group = minifiles_settings,
+  pattern = 'MiniFilesBufferCreate',
+  callback = function(args)
+    local buf_id = args.data.buf_id
+    -- ... call map_split, vim.keymap for g~, gy, etc. here ...
+    vim.keymap.set('n', 'g.', toggle_dotfiles, { buffer = buf_id, desc = 'Show/hide dotfiles' })
+  end,
+})
