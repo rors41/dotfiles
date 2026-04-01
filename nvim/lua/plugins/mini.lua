@@ -1,81 +1,81 @@
-MiniPick = require 'mini.pick'
+MiniPick = require('mini.pick')
 vim.ui.select = MiniPick.ui_select
-MiniPick.setup {
-  -- center mini.pick window
-  window = {
-    config = function()
-      local height = math.floor(0.618 * vim.o.lines)
-      local width = math.floor(0.618 * vim.o.columns)
-      return {
-        anchor = 'NW',
-        height = height,
-        width = width,
-        row = math.floor(0.5 * (vim.o.lines - height)),
-        col = math.floor(0.5 * (vim.o.columns - width)),
-      }
-    end,
-  },
-}
+MiniPick.setup({
+    -- center mini.pick window
+    window = {
+        config = function()
+            local height = math.floor(0.618 * vim.o.lines)
+            local width = math.floor(0.618 * vim.o.columns)
+            return {
+                anchor = 'NW',
+                height = height,
+                width = width,
+                row = math.floor(0.5 * (vim.o.lines - height)),
+                col = math.floor(0.5 * (vim.o.columns - width)),
+            }
+        end,
+    },
+})
 
 require('mini.extra').setup()
 require('mini.files').setup()
 require('mini.surround').setup()
 
-local miniclue = require 'mini.clue'
-miniclue.setup {
-  triggers = {
-    -- Leader triggers
-    { mode = 'n', keys = '<Leader>' },
-    { mode = 'x', keys = '<Leader>' },
+local miniclue = require('mini.clue')
+miniclue.setup({
+    triggers = {
+        -- Leader triggers
+        { mode = 'n', keys = '<Leader>' },
+        { mode = 'x', keys = '<Leader>' },
 
-    -- Built-in completion
-    { mode = 'i', keys = '<C-x>' },
+        -- Built-in completion
+        { mode = 'i', keys = '<C-x>' },
 
-    -- `g` key
-    { mode = 'n', keys = 'g' },
-    { mode = 'x', keys = 'g' },
+        -- `g` key
+        { mode = 'n', keys = 'g' },
+        { mode = 'x', keys = 'g' },
 
-    -- Marks
-    { mode = 'n', keys = "'" },
-    { mode = 'n', keys = '`' },
-    { mode = 'x', keys = "'" },
-    { mode = 'x', keys = '`' },
+        -- Marks
+        { mode = 'n', keys = "'" },
+        { mode = 'n', keys = '`' },
+        { mode = 'x', keys = "'" },
+        { mode = 'x', keys = '`' },
 
-    -- Registers
-    { mode = 'n', keys = '"' },
-    { mode = 'x', keys = '"' },
-    { mode = 'i', keys = '<C-r>' },
-    { mode = 'c', keys = '<C-r>' },
+        -- Registers
+        { mode = 'n', keys = '"' },
+        { mode = 'x', keys = '"' },
+        { mode = 'i', keys = '<C-r>' },
+        { mode = 'c', keys = '<C-r>' },
 
-    -- Window commands
-    { mode = 'n', keys = '<C-w>' },
+        -- Window commands
+        { mode = 'n', keys = '<C-w>' },
 
-    -- `z` key
-    { mode = 'n', keys = 'z' },
-    { mode = 'x', keys = 'z' },
-  },
+        -- `z` key
+        { mode = 'n', keys = 'z' },
+        { mode = 'x', keys = 'z' },
+    },
 
-  clues = {
-    -- Enhance this by adding descriptions for <Leader> mapping groups
-    miniclue.gen_clues.builtin_completion(),
-    miniclue.gen_clues.g(),
-    miniclue.gen_clues.marks(),
-    miniclue.gen_clues.registers(),
-    miniclue.gen_clues.windows(),
-    miniclue.gen_clues.z(),
-  },
-  window = {
-    delay = 500,
-    scroll_down = '<C-d>',
-    scroll_up = '<C-u>',
-  },
-}
+    clues = {
+        -- Enhance this by adding descriptions for <Leader> mapping groups
+        miniclue.gen_clues.builtin_completion(),
+        miniclue.gen_clues.g(),
+        miniclue.gen_clues.marks(),
+        miniclue.gen_clues.registers(),
+        miniclue.gen_clues.windows(),
+        miniclue.gen_clues.z(),
+    },
+    window = {
+        delay = 500,
+        scroll_down = '<C-d>',
+        scroll_up = '<C-u>',
+    },
+})
 
-local statusline = require 'mini.statusline'
+local statusline = require('mini.statusline')
 statusline.setup()
 ---@diagnostic disable-next-line: duplicate-set-field
 statusline.section_location = function()
-  return '%2l:%-2v'
+    return '%2l:%-2v'
 end
 
 vim.keymap.set('n', '<leader>sf', ':Pick files<CR>', { desc = '[S]earch [F]iles' })
@@ -88,47 +88,37 @@ vim.keymap.set('n', '<leader>sc', ':Pick git_commits<CR>', { desc = '[S]earch Gi
 vim.keymap.set('n', '<leader>sb', ':Pick git_branches<CR>', { desc = '[S]earch Git [B]ranches' })
 vim.keymap.set('n', '<leader>sk', ':Pick keymaps<CR>', { desc = '[S]earch [K]eymaps' })
 vim.keymap.set('n', '<leader>sq', function()
-  MiniExtra.pickers.list { scope = 'quickfix' }
+    MiniExtra.pickers.list({ scope = 'quickfix' })
 end, { desc = '[S]earch [Q]uickfix' })
 
 vim.keymap.set('n', '\\', function()
-  local buf_name = vim.api.nvim_buf_get_name(0)
-  local path = vim.fn.filereadable(buf_name) == 1 and buf_name or vim.fn.getcwd()
-  MiniFiles.open(path)
-  MiniFiles.reveal_cwd()
+    local buf_name = vim.api.nvim_buf_get_name(0)
+    local path = vim.fn.filereadable(buf_name) == 1 and buf_name or vim.fn.getcwd()
+    MiniFiles.open(path)
+    MiniFiles.reveal_cwd()
 end, { desc = 'Open Mini Files' })
 
--- LuaJIT local lookup perf
-local sbyte = string.byte
-local sfind = string.find
-
--- Create mapping to show/hide dot-files
 local show_dotfiles = true
 
-local filter_dot = function(fs_entry)
-  -- LuaJIT string.byte compares with no string allocation
-  local is_dot = sbyte(fs_entry.name, 1) == 46 -- 46 is ASCII for '.'
-  -- '1, true' for plain search instead of pattern comparison
-  local is_in_path = sfind(MiniFiles.get_fs_entry().path, fs_entry.path, 1, true) ~= nil
-  return not is_dot or is_in_path
+local filter_show = function(fs_entry)
+    return true
+end
+
+local filter_hide = function(fs_entry)
+    return not vim.startswith(fs_entry.name, '.')
 end
 
 local toggle_dotfiles = function()
-  show_dotfiles = not show_dotfiles
-  local new_filter = function(fs_entry)
-    return show_dotfiles or filter_dot(fs_entry)
-  end
-  MiniFiles.refresh { content = { filter = new_filter } }
+    show_dotfiles = not show_dotfiles
+    local new_filter = show_dotfiles and filter_show or filter_hide
+    MiniFiles.refresh({ content = { filter = new_filter } })
 end
 
--- Actually bind keymaps to toggle hidden, split open, etc.
-local minifiles_settings = vim.api.nvim_create_augroup('my-minif-settings', { clear = true })
 vim.api.nvim_create_autocmd('User', {
-  group = minifiles_settings,
-  pattern = 'MiniFilesBufferCreate',
-  callback = function(args)
-    local buf_id = args.data.buf_id
-    -- ... call map_split, vim.keymap for g~, gy, etc. here ...
-    vim.keymap.set('n', 'g.', toggle_dotfiles, { buffer = buf_id, desc = 'Show/hide dotfiles' })
-  end,
+    pattern = 'MiniFilesBufferCreate',
+    callback = function(args)
+        local buf_id = args.data.buf_id
+        -- Tweak left-hand side of mapping to your liking
+        vim.keymap.set('n', 'g.', toggle_dotfiles, { buffer = buf_id })
+    end,
 })
