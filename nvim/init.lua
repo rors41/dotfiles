@@ -133,6 +133,7 @@ vim.pack.add({
 
 require('plugins.snacks')
 require('plugins.todo')
+require('plugins.mason')
 require('plugins.mini')
 require('plugins.gitsigns')
 require('plugins.lsp')
