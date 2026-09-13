@@ -14,7 +14,7 @@ vim.diagnostic.config({
     severity_sort = true,
     underline = { severity = vim.diagnostic.severity.ERROR },
     virtual_text = {
-        source = 'if_many',
+        source = true,
         spacing = 2,
         format = function(diagnostic)
             local diagnostic_message = {
@@ -43,21 +43,7 @@ vim.lsp.config('lua_ls', {
     },
 })
 
-vim.lsp.config('basedpyright', {
-    settings = {
-        basedpyright = {
-            disableOrganizeImports = true,
-            typeCheckingMode = 'off',
-        },
-        python = {
-            analysis = {
-                ignore = { '*' },
-            },
-        },
-    },
-})
-
-vim.lsp.enable({ 'lua_ls', 'basedpyright' })
+vim.lsp.enable({ 'lua_ls', 'zls', 'ty', 'ruff' })
 
 vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('nvim-lsp-attach', { clear = true }),

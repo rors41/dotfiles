@@ -2,6 +2,11 @@ require('conform').setup({
     -- Map of filetype to formatters
     formatters_by_ft = {
         lua = { 'stylua' },
+        toml = { 'taplo' },
+        javascript = { 'oxfmt' },
+        typescript = { 'oxfmt' },
+        javascriptreact = { 'oxfmt' },
+        typescriptreact = { 'oxfmt' },
 
         -- You can use a function here to determine the formatters dynamically
         python = function(bufnr)

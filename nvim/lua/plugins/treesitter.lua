@@ -1,7 +1,7 @@
-require('nvim-treesitter').install({ 'lua', 'rust', 'zig', 'python', 'javascript', 'markdown', 'markdown_inline' })
+require('nvim-treesitter').install({ 'lua', 'rust', 'odin', 'zig', 'python', 'javascript', 'markdown', 'markdown_inline', 'glsl' })
 
 vim.api.nvim_create_autocmd('FileType', {
-    pattern = { 'rust', 'javascript', 'zig', 'lua', 'python' },
+    pattern = { 'rust', 'javascript', 'zig', 'lua', 'python', 'odin', 'glsl' },
     callback = function()
         -- syntax highlighting, provided by Neovim
         vim.treesitter.start()

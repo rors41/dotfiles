@@ -10,3 +10,5 @@ font-family-bold-italic = MesloLGS NF Bold Italic
 font-size = 13.5
 
 font-feature = -calt
+
+macos-option-as-alt = true
