@@ -43,7 +43,7 @@ vim.lsp.config('lua_ls', {
     },
 })
 
-vim.lsp.enable({ 'lua_ls', 'zls', 'ty', 'ruff' })
+vim.lsp.enable({ 'lua_ls', 'zls', 'ty' })
 
 vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('nvim-lsp-attach', { clear = true }),
